@@ -1,6 +1,13 @@
-FROM openjdk:8-jdk-alpine
-COPY target/hello-wrld-1.0-SNAPSHOT.jar /opt/world/lib/
-COPY hello-wrld-entrypoint.sh /opt/world/bin/
-ENTRYPOINT ["/usr/bin/java"]
-CMD ["-jar", "/opt/spring-cloud/lib/hello-world-0.0.1-SNAPSHOT.jar"]
-EXPOSE 8888
+# Start with a base image containing Java runtime (mine java 8)
+FROM openjdk:8u212-jdk-slim
+# Add Maintainer Info
+# Add a volume pointing to /tmp
+VOLUME /tmp
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
+# The application's jar file (when packaged)
+ARG JAR_FILE=target/hello-wrld-0.0.1-SNAPSHOT.jar
+# Add the application's jar to the container
+ADD ${JAR_FILE} hello-wrld.jar
+# Run the jar file
+ENTRYPOINT ["java","-jar","/hello-wrld.jar"]
