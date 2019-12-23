@@ -6,8 +6,8 @@ VOLUME /tmp
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
 # The application's jar file (when packaged)
-ARG JAR_FILE=target/hello-wrld-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=target/hello-world-0.0.1-SNAPSHOT.jar
 # Add the application's jar to the container
-ADD ${JAR_FILE} hello-wrld.jar
+ADD ${JAR_FILE} hello-world.jar
 # Run the jar file
-ENTRYPOINT ["java","-jar","/hello-wrld.jar"]
+ENTRYPOINT ["java","-jar","/hello-world.jar"]
